@@ -319,7 +319,8 @@ class PrivateRecipeAPITests(TestCase):
 
     def test_create_recipe_with_existing_ingredients(self):
         """Test creating a recipe with existing ingredient."""
-        ingredient_pizza = Ingredient.objects.create(user=self.user, name='Salami')
+        ingredient_pizza = Ingredient.objects.create(user=self.user,
+                                                     name='Salami')
         payload = {
             'title': 'Pizza',
             'time_minutes': 45,
@@ -350,7 +351,8 @@ class PrivateRecipeAPITests(TestCase):
         res = self.client.patch(url, payload, format='json')
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        new_ingredient = Ingredient.objects.get(user=self.user, name='Pistachios')
+        new_ingredient = Ingredient.objects.get(user=self.user,
+                                                name='Pistachios')
         self.assertIn(new_ingredient, recipe.ingredients.all())
 
     def test_update_recipe_assign_ingredient(self):
@@ -359,7 +361,8 @@ class PrivateRecipeAPITests(TestCase):
         recipe = create_recipe(user=self.user)
         recipe.ingredients.add(ingredient_ham)
 
-        ingredient_oregano = Ingredient.objects.create(user=self.user, name='Oregano')
+        ingredient_oregano = Ingredient.objects.create(user=self.user,
+                                                       name='Oregano')
         payload = {'ingredients': [{'name': 'Oregano'}]}
         url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format='json')

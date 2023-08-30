@@ -117,7 +117,8 @@ class PublicUserApiTests(TestCase):
 
 class PrivateUserApiTests(TestCase):
     """Test API requests that require authentication."""
-    # separate classes because I'm going to handle the authentication in the setUp method that's called automatically
+    # separate classes because I'm going to handle the authentication
+    # in the setUp method that's called automatically
     # before each test:
     def setUp(self):
         self.user = create_user(
